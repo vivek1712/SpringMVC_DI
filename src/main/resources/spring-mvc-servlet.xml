@@ -1,0 +1,88 @@
+<!-- <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd"> -->
+	
+	<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+                    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd     
+                    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+<!-- https://dzone.com/articles/dependency-injection-an-introd  -->
+
+	<!-- <bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean> -->
+	
+	<mvc:annotation-driven />
+	
+	<!-- <context:component-scan base-package="com.mkyong.common.controller" /> -->
+	
+	
+	
+	<!-- <context:component-scan base-package="all.in.one" /> --> <!-- working -->
+	
+	<context:component-scan base-package="com.vivek.annotation.component" />
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="address" class="com.vivek.entity.Address">
+	<property name="addId" value="5"/>
+	<property name="streetName" value="Pallamarathu patti"></property>
+	<property name="distName" value="DGL"></property>
+	
+	</bean>
+	
+
+	<bean id="student" class="com.vivek.entity.Student">
+	<property name="id" value="5"/>
+	<property name="stuName" value="vivek"></property>
+	<property name="courseName" value="MCA"></property>
+	<property name="address" ref="address"/>
+	</bean>
+	
+	<!--  interface DI start  - enable if want to check xml based configure , 
+	if want to check annotation based disable below code
+	
+	-->
+	       <!--  <bean id="atmTransport" class="com.vivek.Transport.usage.SoapAtmTransport" />
+	
+	<bean id="atm" class="com.vivek.interf.impl.AutomatedTellerMachineImpl">
+                <property name="transport" ref="atmTransport" />
+        </bean> -->
+	<!-- interface DI End -->
+
+<!--  annotation based so if u want to check annotation autowire and qualifier enabel below code disable xml based -->
+
+<!-- <bean id="soapTransport" class="com.vivek.Transport.usage.SoapAtmTransport" />
+<bean id="standardTransport" class="com.vivek.Transport.usage.StandardAtmTransport" />
+<bean id="simulationTransport" class="com.vivek.Transport.usage.SimulationAtmTransport" />
+<bean id="atm" class="com.vivek.annotation.interf.AutomatedTellerMachineImpl"/>
+ -->
+<!--  end annotation -->
+
+<!--  component service bean -->
+<!--  end component service -->
+
+</beans>
